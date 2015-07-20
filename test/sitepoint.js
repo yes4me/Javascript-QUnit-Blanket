@@ -1,7 +1,7 @@
 /* ===========================================================================
-Created: 2015/07/18 Thomas Nguyen - thomas_ejob@hotmail.com
-Purpose: Learning
-Original source: http://www.sitepoint.com/getting-started-qunit/
+Created:	2015/07/18 Thomas Nguyen - thomas_ejob@hotmail.com
+Purpose:	Learning QUnit
+Inspired:	http://www.sitepoint.com/getting-started-qunit/
 =========================================================================== */
 
 QUnit.test("sitepoint: max()", function (assert) {
