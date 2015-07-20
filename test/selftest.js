@@ -18,5 +18,5 @@ QUnit.test("selftest: example", function(assert){
 	assert.equal(5, 5, "equal 5=5");					//Compare the value of two primitives, having the same value. Does not work on Objects (i.e. arrays)
 	assert.equal("abc", "abc", "equal 'abc'=='abc'");
 	assert.equal(0, false, "0 equal false");
-	assert.strictEqual(0, false, "0 equal false");		//Compare the value of two primitives, having the same value and type.
+	assert.notStrictEqual(0, false, "0 equal false");		//Compare the value of two primitives, having the same value and type.
 });
