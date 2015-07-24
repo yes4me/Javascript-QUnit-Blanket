@@ -2,6 +2,7 @@
 Created:	2015/07/24
 Author:		Thomas Nguyen - thomas_ejob@hotmail.com
 Location:	https://github.com/yes4me/
+Others:		http://stackoverflow.com/questions/17989270/for-loop-performance-storing-array-length-in-a-variable
 Purpose:
 	What is needed
 	==============
@@ -95,7 +96,8 @@ function removeDuplicates(numbers) {
 	var counter = 0;
 	var resultArray		= [];
 	var compareArray	= [];
-	for (i=0; i<numbers.length; i++)
+	var numbersLength	= numbers.length;
+	for (i=0; i<numbersLength; i++)
 	{
 		if (compareArray[ numbers[i] ] == undefined)
 		{
@@ -115,7 +117,8 @@ function hasDuplicates(numbers) {
 		throw new Error('Argument is expected to be an array');
 
 	var compareArray	= [];
-	for (i=0; i<numbers.length; i++)
+	var numbersLength	= numbers.length;
+	for (i=0; i<numbersLength; i++)
 	{
 		if (compareArray[ numbers[i] ] == undefined)
 			compareArray[ numbers[i] ] = 1;
@@ -132,6 +135,21 @@ function areConsecutive(numbers) {
 		throw new Error('At least one argument expected');
 	if (!(numbers instanceof Array))
 		throw new Error('Argument is expected to be an array');
+	if (numbers.length==1)
+		return true;
 
-	allowDuplicates = (arguments[1] == true)? true:false;
+	var allowDuplicates = (arguments[1] == true)? true:false;
+	var numbersSteps	= [];
+	var counter			= 0;
+	var numbersLength	= numbers.length;
+	for (i=0; i<numbersLength-1; i++)
+	{
+		tmp = numbers[i+1] - numbers[i];
+		if (!allowDuplicates || (tmp!=0))
+		{
+			numbersSteps[counter++] = numbers[i+1] - numbers[i];
+		}
+	}
+	numbersSteps = removeDuplicates(numbersSteps);
+	return (numbersSteps.length==1)? true : false;
 }

@@ -35,7 +35,10 @@ QUnit.test('areConsecutive Tests', function(assert){
 
 	assert.throws(function(){ areConsecutive() }, "no argument = undefined")
 	assert.throws(function(){ areConsecutive('a') }, "argument not array = undefined")
-	assert.deepEqual( areConsecutive([1,2,3], true), [1,2,3], "areConsecutive([1,2,3], true) == [1,2,3]")
-	assert.deepEqual( areConsecutive([1,2,3], false), [1,2,3], "areConsecutive([1,2,3], false) == [1,2,3]")
-	assert.deepEqual( areConsecutive([1,2,3], [1,2,3]), [1,2,3], "areConsecutive([1,2,3], [1,2,3]) == [1,2,3]")
+	assert.deepEqual( areConsecutive([5,6,7,8,9], true), true, "areConsecutive([1,2,3], true) == [1,2,3]")
+	assert.deepEqual( areConsecutive([1,2,3,4,5], true), true, "areConsecutive([1,2,3], true) == [1,2,3]")
+	assert.deepEqual( areConsecutive([0,1,2,3,4], true), true, "areConsecutive([1,2,3], true) == [1,2,3]")
+	assert.deepEqual( areConsecutive([0,1,3,3,4], false), false, "areConsecutive([1,2,3], true) == [1,2,3]")
+	//assert.deepEqual( areConsecutive([1,2,3], false), [1,2,3], "areConsecutive([1,2,3], false) == [1,2,3]")
+	//assert.deepEqual( areConsecutive([1,2,3], [1,2,3]), [1,2,3], "areConsecutive([1,2,3], [1,2,3]) == [1,2,3]")
 });
