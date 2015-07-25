@@ -10,13 +10,13 @@ PS:
 =========================================================================== */
 
 QUnit.config.testTimeout = 3000;
-QUnit.begin(function(details){
+QUnit.begin(function(details) {
 	console.log("step FIRST: Starting Tests: there are " + details.totalTests + " tests");
 });
-QUnit.log(function(details){
+QUnit.log(function(details) {
 	console.log("step 2: Asserting -- " + details.name + " (" + details.runtime + ")");
 });
-QUnit.done(function(details){
+QUnit.done(function(details) {
 	console.log("step LAST: Test Execution Ended in "+ details.runtime +" milliseconds");
 	console.log("Passed / Failed (total assertions): " + details.passed + "/" +  details.failed +"("+ details.total +")");
 });
@@ -24,10 +24,10 @@ QUnit.done(function(details){
 
 
 QUnit.module( "functions-tests", {
-	beforeEach : function(){
+	beforeEach : function() {
 		console.log("step 1: Starting test");
 	},
-	afterEach: function(){
+	afterEach: function() {
 		console.log("step 3: test completed");
 	}
 });
@@ -43,8 +43,8 @@ QUnit.test('basic: isEven()', function(assert) {
 
 QUnit.test('basic: sum()', function(assert) {
     assert.equal( sum(1,2,3), 6, "sum = 6");
-    assert.throws( function(){sum()}, "throw exception error when no argument");
-    assert.throws( function(){sum("")}, "throw exception error when argument not a number");
+    assert.throws( function() {sum()}, "throw exception error when no argument");
+    assert.throws( function() {sum("")}, "throw exception error when argument not a number");
 });
 
 QUnit.skip('basic: skip test', function(assert) {
