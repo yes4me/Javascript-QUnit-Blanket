@@ -10,15 +10,26 @@ PS:
 =========================================================================== */
 
 QUnit.config.testTimeout = 3000;
+QUnit.begin(function(details){
+	console.log("step FIRST: Starting Tests: there are " + details.totalTests + " tests");
+});
+QUnit.log(function(details){
+	console.log("step 2: Asserting -- " + details.name + " (" + details.runtime + ")");
+});
+QUnit.done(function(details){
+	console.log("step LAST: Test Execution Ended in "+ details.runtime +" milliseconds");
+	console.log("Passed / Failed (total assertions): " + details.passed + "/" +  details.failed +"("+ details.total +")");
+});
 
 
-QUnit.module("Testing Cars and Robots", {
-  beforeEach : function(){
-    console.log("=== Starting tests ===");
-  },
-  afterEach: function(){
-    console.log("=== test completed ===");
-  }
+
+QUnit.module( "functions-tests", {
+	beforeEach : function(){
+		console.log("step 1: Starting test");
+	},
+	afterEach: function(){
+		console.log("step 3: test completed");
+	}
 });
 
 QUnit.test('basic: isEven()', function(assert) {

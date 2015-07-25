@@ -17,10 +17,22 @@ Purpose:
 =========================================================================== */
 
 QUnit.config.testTimeout = 3000;
+QUnit.begin(function(details){
+	console.log("step FIRST: Starting Tests: there are " + details.totalTests + " tests");
+});
+QUnit.log(function(details){
+	console.log("step 2: Asserting -- " + details.name + " (" + details.runtime + ")");
+});
+QUnit.done(function(details){
+	console.log("step LAST: Test Execution Ended in "+ details.runtime +" milliseconds");
+	console.log("Passed / Failed (total assertions): " + details.passed + "/" +  details.failed +"("+ details.total +")");
+});
 
 
-QUnit.test('Range Tests', function(assert){
-	expect(44);
+
+QUnit.module( "Range Tests");
+QUnit.test('special cases', function(assert){
+	expect(11);
 
 	// The first two arguments are required, skipping them returns undefined
 	assert.equal(range(), undefined, 'Range invoked with no arguments results in undefined');
@@ -32,6 +44,16 @@ QUnit.test('Range Tests', function(assert){
 
 	// Step == 0 results in undefined
 	assert.equal(range(2,5,0), undefined, 'Step == 0 results in undefined');
+
+	assert.equal(range(5,1,1), undefined, "range(5,1,1) == undefined (results in infinite sequence)");
+	assert.equal(range(5,-6,1), undefined, "range(5,-6,1) == undefined (results in infinite sequence)");
+	assert.equal(range(-2,-6,1), undefined, "range(-2,-6,1) == undefined (results in infinite sequence)");
+	assert.equal(range(1,5,-1), undefined, "range(1,5,-1) == undefined (results in infinite sequence)");
+	assert.equal(range(-6,5,-1), undefined, "range(-6,5,-1) == undefined (results in infinite sequence)");
+	assert.equal(range(-6,-2,-1), undefined, "range(-6,-2,-1) == undefined (results in infinite sequence)");
+});
+QUnit.test('typical values - step is skipped', function(assert){
+	expect(9);
 
 	// Step is skipped, we deduce the step from start and end
 	// test # 1: start == end
@@ -48,6 +70,9 @@ QUnit.test('Range Tests', function(assert){
 	assert.deepEqual(range(2,-2), [2,1,0,-1,-2], 'Skip step. start == 2, end == -2. Expect: [2,1,0,-1,-2]');
 	assert.deepEqual(range(-2,-6), [-2,-3,-4,-5,-6], 'Skip step. range(-2,-6) == [-2,-3,-4,-5,-6]');
 	assert.deepEqual(range(-6,-2), [-6,-5,-4,-3,-2], 'Skip step. range(-6,-2) == [-6,-5,-4,-3,-2]');
+});
+QUnit.test('typical values - step is provided', function(assert){
+	expect(24);
 
 	// provide step == -1. Valid and invalid range
 	assert.deepEqual(range(2,6,1), [2,3,4,5,6], 'step=1 range(2,6,1) == [2,3,4,5,6]');
@@ -56,13 +81,6 @@ QUnit.test('Range Tests', function(assert){
 	assert.deepEqual(range(6,2,-1), [6,5,4,3,2], 'step=-1 range(6,2,-1) == [6,5,4,3,2]');
 	assert.deepEqual(range(2,-2,-1), [2,1,0,-1,-2], 'step=-1 range(2,-2,-1) == [2,1,0,-1,-2]');
 	assert.deepEqual(range(-2,-6,-1), [-2,-3,-4,-5,-6], 'step=-1 range(-2,-6,-1) == [-2,-3,-4,-5,-6]');
-
-	assert.equal(range(5,1,1), undefined, "range(5,1,1) == undefined (results in infinite sequence)");
-	assert.equal(range(5,-6,1), undefined, "range(5,-6,1) == undefined (results in infinite sequence)");
-	assert.equal(range(-2,-6,1), undefined, "range(-2,-6,1) == undefined (results in infinite sequence)");
-	assert.equal(range(1,5,-1), undefined, "range(1,5,-1) == undefined (results in infinite sequence)");
-	assert.equal(range(-6,5,-1), undefined, "range(-6,5,-1) == undefined (results in infinite sequence)");
-	assert.equal(range(-6,-2,-1), undefined, "range(-6,-2,-1) == undefined (results in infinite sequence)");
 
 	// +ve step
 	assert.deepEqual(range(1,9,2), [1,3,5,7,9], "range(1,9,2) == [1,3,5,7,9]");
