@@ -7,6 +7,7 @@ Inspired:	http://www.sitepoint.com/getting-started-qunit/
 QUnit.config.testTimeout = 3000;
 
 
+QUnit.module("sitepoint");
 QUnit.test("sitepoint: max()", function (assert) {
 	//OPTIONAL: Number of asserts expected to be tested in this test (useful when dealing with asynchronous code)
 	expect(6);
