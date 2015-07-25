@@ -1,6 +1,5 @@
 /* ===========================================================================
 Source:	http://www.sitepoint.com/getting-started-qunit/
-Purpose:	Learning QUnit - https://api.qunitjs.com/category/assert/
 =========================================================================== */
 
 var App = {
