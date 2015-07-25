@@ -3,6 +3,7 @@ Created:	2015/07/24
 Author:		Thomas Nguyen - thomas_ejob@hotmail.com
 Location:	https://github.com/yes4me/
 Others:		http://stackoverflow.com/questions/17989270/for-loop-performance-storing-array-length-in-a-variable
+			http://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript
 Purpose:
 	What is needed
 	==============
@@ -61,7 +62,7 @@ Purpose:
 	[1,2,3,5]
 
 	The optional argument "allowDuplicates" tells the function whether to allow
-	dupliacet numbers when determining "consecutiveness"
+	duplicate numbers when determining "consecutiveness"
 
 	This following numbers are consecutive if allowDuplicates is true
 	[1,1,2,3,3,4]
@@ -128,8 +129,8 @@ function hasDuplicates(numbers) {
 	return false;
 }
 
-//The function takes an array of numbers and determines if the numbers are consecutive or not.
-function areConsecutive(numbers) {
+//The function takes an array of numbers and return the identical difference between them.
+function getStep(numbers) {
 	numArgs = arguments.length;
 	if (numArgs < 1)
 		throw new Error('At least one argument expected');
@@ -147,9 +148,22 @@ function areConsecutive(numbers) {
 		tmp = numbers[i+1] - numbers[i];
 		if (!allowDuplicates || (tmp!=0))
 		{
-			numbersSteps[counter++] = numbers[i+1] - numbers[i];
+			//alert(8.3-7.3) did not return 1 but 1.000009 in Javascript
+			numbersSteps[counter++] = new BigNumber( numbers[i+1] ).minus( numbers[i] );
 		}
 	}
 	numbersSteps = removeDuplicates(numbersSteps);
-	return (numbersSteps.length==1)? true : false;
+	return (numbersSteps.length==1)? numbersSteps[0] : undefined;
+}
+//The function takes an array of numbers and determines if the numbers are consecutive or not.
+function areConsecutive(numbers) {
+	var allowDuplicates = (arguments[1] == true)? true:false;
+
+	var step;
+	//undefined is a value in Javascript. If numbers==undefined, it is passed to getStep(), and QUnit cannot check for no argument
+	if (numbers != undefined)
+		step = getStep(numbers, allowDuplicates);
+	else
+		step = getStep();
+	return (Math.abs(step)==1)? true: false;
 }

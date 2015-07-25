@@ -12,33 +12,79 @@ QUnit.config.testTimeout = 3000;
 
 
 QUnit.test('removeDuplicates Tests', function(assert){
-	//expect(44);
+	expect(11);
 
-	assert.throws(function(){ removeDuplicates() }, "no argument = undefined")
-	assert.throws(function(){ removeDuplicates('a') }, "argument not array = undefined")
-	assert.throws(function(){ removeDuplicates([1,2,3], [1,2,3]) }, "too many arguments = undefined")
+	assert.throws(function(){ removeDuplicates() }, "no argument = undefined");
+	assert.throws(function(){ removeDuplicates('a') }, "argument not array = undefined");
+	assert.throws(function(){ removeDuplicates([1,2,3], [1,2,3]) }, "too many arguments = undefined");
 	assert.deepEqual(removeDuplicates([1,2,3,4,5]), [1,2,3,4,5], "removeDuplicates([1,2,3,4,5]) == [1,2,3,4,5]");
 	assert.deepEqual(removeDuplicates([1,2,3,2,5]), [1,2,3,5], "removeDuplicates([1,2,3,2,5]) == [1,2,3,5]");
+	assert.deepEqual(removeDuplicates([-1,-2,-3,-4,-5]), [-1,-2,-3,-4,-5], "removeDuplicates([-1,-2,-3,-4,-5]) == [-1,-2,-3,-4,-5]");
+	assert.deepEqual(removeDuplicates([-1,-2,-3,-2,-5]), [-1,-2,-3,-5], "removeDuplicates([-1,-2,-3,-2,-5]) == [-1,-2,-3,-5]");
+	assert.deepEqual(removeDuplicates([-1,2,-3,4,8]), [-1,2,-3,4,8], "removeDuplicates([-1,2,-3,4,8]) == [-1,2,-3,4,8]");
+	assert.deepEqual(removeDuplicates([-1,2,-3,4,2]), [-1,2,-3,4], "removeDuplicates([-1,2,-3,4,2]) == [-1,2,-3,4]");
+	assert.deepEqual(removeDuplicates([-1.4,2.9,-3.2,4.4,2.9]), [-1.4,2.9,-3.2,4.4], "removeDuplicates([-1.4,2.9,-3.2,4.4,2.9]) == [-1.4,2.9,-3.2,4.4]");
+	assert.deepEqual(removeDuplicates([-1.4,2.9,-3.2,4.4,-2.9]), [-1.4,2.9,-3.2,4.4,-2.9], "removeDuplicates([-1.4,2.9,-3.2,4.4,-2.9]) == [-1.4,2.9,-3.2,4.4,-2.9]");
 });
 QUnit.test('hasDuplicates Tests', function(assert){
-	//expect(44);
+	expect(11);
 
-	assert.throws(function(){ hasDuplicates() }, "no argument = undefined")
-	assert.throws(function(){ hasDuplicates('a') }, "argument not array = undefined")
-	assert.throws(function(){ hasDuplicates([1,2,3], [1,2,3]) }, "too many arguments = undefined")
-	assert.deepEqual( hasDuplicates([2,1,3,1]), true, "hasDuplicates([2,1,3,1] == true")
-	assert.deepEqual( hasDuplicates([2,4,3,1]), false, "hasDuplicates([2,4,3,1] == false")
+	assert.throws(function(){ hasDuplicates() }, "no argument = undefined");
+	assert.throws(function(){ hasDuplicates('a') }, "argument not array = undefined");
+	assert.throws(function(){ hasDuplicates([1,2,3], [1,2,3]) }, "too many arguments = undefined");
+	assert.deepEqual( hasDuplicates([2,1,3,1]), true, "hasDuplicates([2,1,3,1] == true");
+	assert.deepEqual( hasDuplicates([2,4,3,1]), false, "hasDuplicates([2,4,3,1] == false");
+	assert.deepEqual( hasDuplicates([-2,-1,-3,-1]), true, "hasDuplicates([-2,-1,-3,-1] == true");
+	assert.deepEqual( hasDuplicates([-2,-4,-3,-1]), false, "hasDuplicates([-2,-4,-3,-1] == false");
+	assert.deepEqual( hasDuplicates([-2,-5,-5,9]), true, "hasDuplicates([-2,-5,1,9] == true");
+	assert.deepEqual( hasDuplicates([-2,-5,1,9]), false, "hasDuplicates([-2,-5,-5,9] == false");
+	assert.deepEqual( hasDuplicates([-2.3,5.34,1.03,6.9,5.34,9]), true, "hasDuplicates([-2.3,5.34,1.03,6.9,5.34,9] == true");
+	assert.deepEqual( hasDuplicates([-2.3,5.34,1.03,6.9,5.35,9]), false, "hasDuplicates([-2.3,5.34,1.03,6.9,5.35,9] == false");
 });
 
 QUnit.test('areConsecutive Tests', function(assert){
-	//expect(44);
+	expect(38);
 
-	assert.throws(function(){ areConsecutive() }, "no argument = undefined")
-	assert.throws(function(){ areConsecutive('a') }, "argument not array = undefined")
-	assert.deepEqual( areConsecutive([5,6,7,8,9], true), true, "areConsecutive([1,2,3], true) == [1,2,3]")
-	assert.deepEqual( areConsecutive([1,2,3,4,5], true), true, "areConsecutive([1,2,3], true) == [1,2,3]")
-	assert.deepEqual( areConsecutive([0,1,2,3,4], true), true, "areConsecutive([1,2,3], true) == [1,2,3]")
-	assert.deepEqual( areConsecutive([0,1,3,3,4], false), false, "areConsecutive([1,2,3], true) == [1,2,3]")
-	//assert.deepEqual( areConsecutive([1,2,3], false), [1,2,3], "areConsecutive([1,2,3], false) == [1,2,3]")
-	//assert.deepEqual( areConsecutive([1,2,3], [1,2,3]), [1,2,3], "areConsecutive([1,2,3], [1,2,3]) == [1,2,3]")
+	assert.throws(function(){ areConsecutive() }, "no argument = undefined");
+	assert.throws(function(){ areConsecutive('a') }, "argument not array = undefined");
+
+	assert.deepEqual( areConsecutive([4]), true, "areConsecutive([4]) == true");
+	assert.deepEqual( areConsecutive([3,4]), true, "areConsecutive([3,4]) == true");
+	assert.deepEqual( areConsecutive([4,3]), true, "areConsecutive([4,3]) == true");
+	assert.deepEqual( areConsecutive([4,4]), false, "areConsecutive([4,4]) == false");
+	assert.deepEqual( areConsecutive([2,3,4]), true, "areConsecutive([2,3,4]) == true");
+	assert.deepEqual( areConsecutive([4,3,2]), true, "areConsecutive([4,3,2]) == true");
+	assert.deepEqual( areConsecutive([3,4,2]), false, "areConsecutive([4,3,2]) == false");
+	assert.deepEqual( areConsecutive([4,2,3]), false, "areConsecutive([4,3,2]) == false");
+	assert.deepEqual( areConsecutive([4,4,4]), false, "areConsecutive([4,4,4]) == false");
+
+	assert.deepEqual( areConsecutive([-4]), true, "areConsecutive([-4]) == true");
+	assert.deepEqual( areConsecutive([-3,-4]), true, "areConsecutive([-3,-4]) == true");
+	assert.deepEqual( areConsecutive([-4,-3]), true, "areConsecutive([-4,-3]) == true");
+	assert.deepEqual( areConsecutive([-4,-4]), false, "areConsecutive([-4,-4]) == false");
+	assert.deepEqual( areConsecutive([-2,-3,-4]), true, "areConsecutive([-2,-3,-4]) == true");
+	assert.deepEqual( areConsecutive([-4,-3,-2]), true, "areConsecutive([-4,-3,-2]) == true");
+	assert.deepEqual( areConsecutive([-3,-4,-2]), false, "areConsecutive([-4,-3,-2]) == false");
+	assert.deepEqual( areConsecutive([-4,-2,-3]), false, "areConsecutive([-4,-3,-2]) == false");
+	assert.deepEqual( areConsecutive([-4,-4,-4]), false, "areConsecutive([-4,-4,-4]) == false");
+
+	assert.deepEqual( areConsecutive([-1,0,1]), true, "areConsecutive([-1,0,1]) == true");
+	assert.deepEqual( areConsecutive([1,0,-1]), true, "areConsecutive([1,0,-1]) == true");
+	assert.deepEqual( areConsecutive([1,-1,-3]), false, "areConsecutive([1,-1,-3]) == false");
+	assert.deepEqual( areConsecutive([4.1,3.1,2.1]), true, "areConsecutive([4.1,3.1,2.1]) == true");
+	assert.deepEqual( areConsecutive([-4.1,-3.1,-2.1]), true, "areConsecutive([-4.1,-3.1,-2.1]) == true");
+	assert.deepEqual( areConsecutive([-3.1,-4.1,-2.1]), false, "areConsecutive([-4.1,-3.1,-2.1]) == false");
+
+	assert.deepEqual( areConsecutive([0,1,2,2,3], false), false, "areConsecutive([0,1,2,2,3], false) == false");
+	assert.deepEqual( areConsecutive([3,2,2,1,0], false), false, "areConsecutive([3,2,2,1,0], false) == false");
+	assert.deepEqual( areConsecutive([-0,-1,-2,-2,-3], false), false, "areConsecutive([-0,-1,-2,-2,-3], false) == false");
+	assert.deepEqual( areConsecutive([-3,-2,-2,-1,-0], false), false, "areConsecutive([-3,-2,-2,-1,-0], false) == false");
+	assert.deepEqual( areConsecutive([-2,-1,0,1,1,2], false), false, "areConsecutive([-2,-1,0,1,1,2], false) == false");
+	assert.deepEqual( areConsecutive([2,1,1,0,-1,-2], false), false, "areConsecutive([2,1,1,0,-1,-2], false) == false");
+	assert.deepEqual( areConsecutive([0,1,2,2,3], true), true, "areConsecutive([0,1,2,2,3], true) == true");
+	assert.deepEqual( areConsecutive([3,2,2,1,0], true), true, "areConsecutive([3,2,2,1,0], true) == true");
+	assert.deepEqual( areConsecutive([-0,-1,-2,-2,-3], true), true, "areConsecutive([-0,-1,-2,-2,-3], true) == true");
+	assert.deepEqual( areConsecutive([-3,-2,-2,-1,-0], true), true, "areConsecutive([-3,-2,-2,-1,-0], true) == true");
+	assert.deepEqual( areConsecutive([-2,-1,0,1,1,2], true), true, "areConsecutive([-2,-1,0,1,1,2], true) == true");
+	assert.deepEqual( areConsecutive([2,1,1,0,-1,-2], true), true, "areConsecutive([2,1,1,0,-1,-2], true) == true");
 });
