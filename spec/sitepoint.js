@@ -1,6 +1,8 @@
 /* ===========================================================================
-Created:	2015/07/18 Thomas Nguyen - thomas_ejob@hotmail.com
-Purpose:	Learning QUnit
+Created:	2015/07/18
+Author:		Thomas Nguyen - thomas_ejob@hotmail.com
+Location:	https://github.com/yes4me/
+Purpose:	Learning QUnit - https://api.qunitjs.com/category/assert/
 Inspired:	http://www.sitepoint.com/getting-started-qunit/
 =========================================================================== */
 
@@ -25,8 +27,8 @@ QUnit.test('sitepoint: isOdd()', function (assert) {
 	expect(5);
 	//ok(value[, message]: An assertion that passes if the first argument is truthy;
 	assert.ok( !App.isOdd(0), '0 is not odd');
-	assert.ok( App.isOdd(5), '5 is odd');
 	assert.ok( !App.isOdd(2), '2 is not odd');
+	assert.ok( App.isOdd(5), '5 is odd');
 	assert.ok( !App.isOdd(null), 'null is not odd');
 	assert.ok( !App.isOdd([]), '[] is not odd');
 });

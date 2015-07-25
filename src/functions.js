@@ -2,8 +2,6 @@
 Created:	2015/07/24
 Author:		Thomas Nguyen - thomas_ejob@hotmail.com
 Location:	https://github.com/yes4me/
-Others:		http://stackoverflow.com/questions/17989270/for-loop-performance-storing-array-length-in-a-variable
-			http://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript
 Purpose:
 	What is needed
 	==============
@@ -84,6 +82,9 @@ Purpose:
 	Also you will see how you can use helper functions to develop you tests
 	You will also how see code written somewhere else (range.js) can be used to develop
 	you test data.
+Others:		https://api.qunitjs.com/category/assert/
+			http://stackoverflow.com/questions/17989270/for-loop-performance-storing-array-length-in-a-variable
+			http://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript
 =========================================================================== */
 
 //The function takes an array of numbers (sorted or not) and returns an array of numbers with duplicates removed
