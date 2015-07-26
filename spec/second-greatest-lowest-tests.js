@@ -19,7 +19,7 @@ QUnit.done(function(details) {
 
 
 
-QUnit.module( "Range Tests");
+QUnit.module( "second-greatest-lowest Tests");
 QUnit.test('special cases', function(assert) {
 	expect(6);
 	assert.deepEqual(compute([]), undefined, "0 number = undefined")
