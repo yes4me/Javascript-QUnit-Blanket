@@ -30,15 +30,15 @@ QUnit.test('special cases', function(assert) {
 	assert.throws(function() { removeDuplicates([1,2,3], [1,2,3]) }, "too many arguments = undefined");
 });
 QUnit.test('no duplicate value', function(assert) {
-	expect(5);
+	expect(4);
 	assert.deepEqual(removeDuplicates([1,2,3,4,5]), [1,2,3,4,5], "removeDuplicates([1,2,3,4,5]) == [1,2,3,4,5]");
-	assert.deepEqual(removeDuplicates([1,2,3,2,5]), [1,2,3,5], "removeDuplicates([1,2,3,2,5]) == [1,2,3,5]");
 	assert.deepEqual(removeDuplicates([-1,-2,-3,-4,-5]), [-1,-2,-3,-4,-5], "removeDuplicates([-1,-2,-3,-4,-5]) == [-1,-2,-3,-4,-5]");
 	assert.deepEqual(removeDuplicates([-1,2,-3,4,8]), [-1,2,-3,4,8], "removeDuplicates([-1,2,-3,4,8]) == [-1,2,-3,4,8]");
 	assert.deepEqual(removeDuplicates([-1.4,2.9,-3.2,4.4,-2.9]), [-1.4,2.9,-3.2,4.4,-2.9], "removeDuplicates([-1.4,2.9,-3.2,4.4,-2.9]) == [-1.4,2.9,-3.2,4.4,-2.9]");
 });
 QUnit.test('duplicate values', function(assert) {
-	expect(5);
+	expect(6);
+	assert.deepEqual(removeDuplicates([1,2,3,2,5]), [1,2,3,5], "removeDuplicates([1,2,3,2,5]) == [1,2,3,5]");
 	assert.deepEqual(removeDuplicates([-1,-2,-3,-2,-5]), [-1,-2,-3,-5], "removeDuplicates([-1,-2,-3,-2,-5]) == [-1,-2,-3,-5]");
 	assert.deepEqual(removeDuplicates([-1,2,-3,4,2]), [-1,2,-3,4], "removeDuplicates([-1,2,-3,4,2]) == [-1,2,-3,4]");
 	assert.deepEqual(removeDuplicates([-1.4,2.9,-3.2,4.4,2.9]), [-1.4,2.9,-3.2,4.4], "removeDuplicates([-1.4,2.9,-3.2,4.4,2.9]) == [-1.4,2.9,-3.2,4.4]");
