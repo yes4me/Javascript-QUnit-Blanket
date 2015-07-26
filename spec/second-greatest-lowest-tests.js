@@ -21,10 +21,12 @@ QUnit.done(function(details) {
 
 QUnit.module( "Range Tests");
 QUnit.test('special cases', function(assert) {
-	expect(4);
-	assert.deepEqual(compute([3]), undefined, "1 number = undefined")
+	expect(6);
 	assert.deepEqual(compute([]), undefined, "0 number = undefined")
+	assert.deepEqual(compute([3]), undefined, "1 number = undefined")
 	assert.throws(function() { compute([1,2,3,4], [1,2,3,4]) }, "throw exception when using 2 arguments")
+	assert.throws(function() { compute() }, "throw exception error when no argument")
+	assert.throws(function() { compute("") }, "throw exception error when empty string")
 	assert.throws(function() { compute('a') }, "throw exception error when not an array")
 });
 QUnit.test('typical values', function(assert) {
