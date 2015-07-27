@@ -2,7 +2,7 @@
 Created:	2015/07/24
 Author:		Thomas Nguyen - thomas_ejob@hotmail.com
 Location:	https://github.com/yes4me/
-Purpose:
+Purpose:	Learn Javascript Object and...
 	What is needed
 	==============
 	In this exercise, you will be writing three functions and providing tests for
@@ -87,13 +87,32 @@ Others:		https://api.qunitjs.com/category/assert/
 			http://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript
 =========================================================================== */
 
+function MyArray(numbers) {
+	if (numbers instanceof Array)
+		this.numbers = numbers;
+	else
+		this.numbers = null;
+};
+//Getters and setters
+MyArray.prototype.getArray = function() {
+	return this.numbers;
+}
+MyArray.prototype.setArray = function(numbers) {
+	if (numbers instanceof Array)
+	{
+		this.numbers = numbers;
+		return true;
+	}
+	return false;
+}
 //The function takes an array of numbers (sorted or not) and returns an array of numbers with duplicates removed
-function removeDuplicates(numbers) {
-	numArgs = arguments.length;
-	if (numArgs != 1)
-		throw new Error('One argument expected');
+MyArray.prototype.removeDuplicates = function(numbers) {
+	if (!(numbers instanceof Array))
+		numbers = this.getArray();
 	if (!(numbers instanceof Array))
 		throw new Error('Argument is expected to be an array');
+	if (numbers.length==0)
+		throw new Error('Argument is empty');
 
 	var counter = 0;
 	var resultArray		= [];
@@ -108,15 +127,15 @@ function removeDuplicates(numbers) {
 		}
 	}
 	return resultArray;
-}
-
+};
 //The function takes an array of numbers and returns whether there were duplicates or not (returns true if there are duplicates, false otherwise)
-function hasDuplicates(numbers) {
-	numArgs = arguments.length;
-	if (numArgs != 1)
-		throw new Error('One argument expected');
+MyArray.prototype.hasDuplicates = function(numbers) {
+	if (!(numbers instanceof Array))
+		numbers = this.getArray();
 	if (!(numbers instanceof Array))
 		throw new Error('Argument is expected to be an array');
+	if (numbers.length==0)
+		throw new Error('Argument is empty');
 
 	var compareArray	= [];
 	var numbersLength	= numbers.length;
@@ -129,16 +148,17 @@ function hasDuplicates(numbers) {
 	}
 	return false;
 }
-
 //The function takes an array of numbers and return the identical difference between them.
-function getStep(numbers) {
-	numArgs = arguments.length;
-	if (numArgs < 1)
-		throw new Error('At least one argument expected');
+MyArray.prototype.getStep = function(numbers) {
+	if (!(numbers instanceof Array))
+		numbers = this.getArray();
 	if (!(numbers instanceof Array))
 		throw new Error('Argument is expected to be an array');
+	if (numbers.length==0)
+		throw new Error('Argument is empty');
+
 	if (numbers.length==1)
-		return true;
+		return 0;
 
 	var allowDuplicates = (arguments[1] == true)? true:false;
 	var numbersSteps	= [];
@@ -153,18 +173,20 @@ function getStep(numbers) {
 			numbersSteps[counter++] = new BigNumber( numbers[i+1] ).minus( numbers[i] );
 		}
 	}
-	numbersSteps = removeDuplicates(numbersSteps);
+	numbersSteps = this.removeDuplicates(numbersSteps);
 	return (numbersSteps.length==1)? numbersSteps[0] : undefined;
 }
-//The function takes an array of numbers and determines if the numbers are consecutive or not.
-function areConsecutive(numbers) {
+//The function takes an array of numbers and determines if the numbers are consecutive (within 1 digit) or not.
+MyArray.prototype.areConsecutive = function(numbers) {
+	if (!(numbers instanceof Array))
+		numbers = this.getArray();
+	if (!(numbers instanceof Array))
+		throw new Error('Argument is expected to be an array');
+	if (numbers.length==1)
+		return true;
 	var allowDuplicates = (arguments[1] == true)? true:false;
 
-	var step;
 	//undefined is a value in Javascript. If numbers==undefined, it is passed to getStep(), and QUnit cannot check for no argument
-	if (numbers != undefined)
-		step = getStep(numbers, allowDuplicates);
-	else
-		step = getStep();
+	var step = this.getStep(numbers, allowDuplicates);
 	return (Math.abs(step)==1)? true: false;
 }

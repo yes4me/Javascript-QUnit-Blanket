@@ -37,6 +37,17 @@ QUnit.module( "basic", {
 
 
 QUnit.module("basic");
+QUnit.test("DIFFERENCE", function(assert) {
+	var value1 = 2+3;
+	var value3 = 5;
+	var array1 = [1,2,3];
+	var array2 = [1,2,3];
+
+    assert.ok(1==1, "1==1");
+	assert.equal(2+3, "5", "2+3==5");
+	assert.deepEqual(5, 5, "5 === 5");
+	assert.strictEqual(5, 5, "5 === 5");
+});
 QUnit.test("assert.ok", function(assert) {
 	expect(3); //optional
 	assert.ok(true);										//Return "Okay" by default
@@ -70,10 +81,10 @@ QUnit.test("assert.strictEqual", function(assert) {
 	assert.notStrictEqual(0, false, "0 !== false");
 	assert.notStrictEqual(null, undefined, "null !== undefined");
 });
-QUnit.skip('How to skip a test', function(assert) {
+QUnit.skip("How to skip a test", function(assert) {
     assert.equal( sum(1,2,3), 6, "sum = 6");
 });
-QUnit.test('Testing a function()', function(assert) {
+QUnit.test("Testing a function()", function(assert) {
 	expect(8); //optional
     assert.ok(isEven(0), "0 is an even number");
     assert.ok(isEven(2), "2 is an even number");
@@ -83,4 +94,13 @@ QUnit.test('Testing a function()', function(assert) {
     assert.equal( sum(1,2,3), 6, "sum = 6");
     assert.throws( function() {sum()}, "throw exception error when no argument");
     assert.throws( function() {sum("")}, "throw exception error when argument not a number");
+});
+QUnit.test("OTHERS: what is FALSE(by default) in Javascript", function(assert) {
+	expect(6); //optional
+	assert.equal(0, false);
+	assert.equal(false, false);
+	assert.equal("", false);
+	assert.notEqual(null, false);			//This is different from Jasmine
+	assert.notEqual(NaN, false);			//This is different from Jasmine
+	assert.notEqual(undefined, false);		//This is different from Jasmine
 });
