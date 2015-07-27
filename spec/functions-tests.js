@@ -107,6 +107,27 @@ QUnit.test('duplicate values', function(assert) {
 
 
 
+QUnit.module("getStep Tests", {
+	beforeEach : function() {
+		console.log("beforeEach: Starting getStep test");
+		myArray = new MyArray();
+	},
+	afterEach: function() {
+		console.log("afterEach: test getStep completed");
+		myArray = null;
+	}
+});
+QUnit.test('special cases: MyArray is undefined', function(assert) {
+	expect(5);
+	assert.throws(function() { myArray.getStep() }, "no argument = undefined");
+	assert.throws(function() { myArray.getStep('a') }, "argument not array = undefined");
+	assert.throws(function() { myArray.getStep([]) }, "argument is empty array");
+	assert.deepEqual( myArray.getStep([6]), 0, "Only one value");
+	assert.deepEqual( myArray.getStep([6,4,2], 'xxx', [4,5,6]), -2, "all additional parameters are skipped");
+});
+
+
+
 QUnit.module("areConsecutive Tests", {
 	beforeEach : function() {
 		console.log("beforeEach: Starting areConsecutive test");

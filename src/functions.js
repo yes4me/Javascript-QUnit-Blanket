@@ -174,7 +174,7 @@ MyArray.prototype.getStep = function(numbers) {
 		}
 	}
 	numbersSteps = this.removeDuplicates(numbersSteps);
-	return (numbersSteps.length==1)? numbersSteps[0] : undefined;
+	return (numbersSteps.length==1)? Number(numbersSteps[0]) : undefined;
 }
 //The function takes an array of numbers and determines if the numbers are consecutive (within 1 digit) or not.
 MyArray.prototype.areConsecutive = function(numbers) {
