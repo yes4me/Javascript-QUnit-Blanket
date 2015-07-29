@@ -1,4 +1,4 @@
-/* ===========================================================================
+/* =====================================================================================
 Created:	2015/07/22
 Author:		Thomas Nguyen - thomas_ejob@hotmail.com
 Location:	https://github.com/yes4me/
@@ -21,7 +21,7 @@ Purpose:
  *
  * Be sure to think of all the different permutations and combinations and
  * provide test suite that covers many of them
-=========================================================================== */
+===================================================================================== */
 
 function sortNumber(a,b) {
     return a - b;

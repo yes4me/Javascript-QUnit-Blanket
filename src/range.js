@@ -1,4 +1,4 @@
-/* ===========================================================================
+/* =====================================================================================
 Created:	2015/07/22
 Author:		Thomas Nguyen - thomas_ejob@hotmail.com
 Location:	https://github.com/yes4me/
@@ -21,7 +21,7 @@ Purpose:
 
 	In all the cases where the parameters are invalid,
 	the function should return undefined
-=========================================================================== */
+===================================================================================== */
 
 // Given start, end and step, returns an array with start and end both inclusive and seperated by step (positive or negative)
 function range(start, end, step) {

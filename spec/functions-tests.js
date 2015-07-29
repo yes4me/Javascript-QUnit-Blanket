@@ -1,4 +1,4 @@
-/* ===========================================================================
+/* =====================================================================================
 Created:	2015/07/24
 Author:		Thomas Nguyen - thomas_ejob@hotmail.com
 Location:	https://github.com/yes4me/
@@ -6,7 +6,7 @@ Purpose:
 	you will see how you can use helper functions to develop you tests
 	You will also how see code written somewhere else (range.js) can be used to develop
 	you test data.
-=========================================================================== */
+===================================================================================== */
 
 QUnit.config.testTimeout = 3000;
 QUnit.begin(function(details) {

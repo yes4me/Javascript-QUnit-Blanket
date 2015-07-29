@@ -1,4 +1,4 @@
-/* ===========================================================================
+/* =====================================================================================
 Created:	2015/07/22
 Author:		Thomas Nguyen - thomas_ejob@hotmail.com
 Location:	https://github.com/yes4me/
@@ -14,7 +14,7 @@ Purpose:
 	After you have developed the function such that all the tests passes, please
 	add few more tests that you may think tests areas not tested by tests provided
 	by me.
-=========================================================================== */
+===================================================================================== */
 
 QUnit.config.testTimeout = 3000;
 QUnit.begin(function(details) {

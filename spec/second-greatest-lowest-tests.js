@@ -1,9 +1,9 @@
-/* ===========================================================================
+/* =====================================================================================
 Created:	2015/07/22
 Author:		Thomas Nguyen - thomas_ejob@hotmail.com
 Location:	https://github.com/yes4me/
 Purpose:	Learning QUnit - https://api.qunitjs.com/category/assert/
-=========================================================================== */
+===================================================================================== */
 
 QUnit.config.testTimeout = 3000;
 QUnit.begin(function(details) {

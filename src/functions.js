@@ -1,4 +1,4 @@
-/* ===========================================================================
+/* =====================================================================================
 Created:	2015/07/24
 Author:		Thomas Nguyen - thomas_ejob@hotmail.com
 Location:	https://github.com/yes4me/
@@ -85,7 +85,7 @@ Purpose:	Learn Javascript Object and...
 Others:		https://api.qunitjs.com/category/assert/
 			http://stackoverflow.com/questions/17989270/for-loop-performance-storing-array-length-in-a-variable
 			http://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript
-=========================================================================== */
+===================================================================================== */
 
 function MyArray(numbers) {
 	if (numbers instanceof Array)

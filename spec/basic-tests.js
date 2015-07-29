@@ -1,4 +1,4 @@
-/* ===========================================================================
+/* =====================================================================================
 Created:	2015/07/17
 Author:		Thomas Nguyen - thomas_ejob@hotmail.com
 Location:	https://github.com/yes4me/
@@ -9,7 +9,7 @@ PS:
 			assert.strictEqual/notStrictEqual:	same as === for primitive ONLY (check for value and type)
 			assert.deepEqual:					same as == but this is for Objects ex: [1,2,3] !== [2,3,1]
 			assert.throws						check for exception
-=========================================================================== */
+===================================================================================== */
 
 QUnit.config.testTimeout = 3000;
 QUnit.begin(function(details) {
