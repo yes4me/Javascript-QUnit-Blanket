@@ -54,7 +54,7 @@ QUnit.test("assert.ok", function(assert) {
     assert.ok(1==1, "1==1");
     assert.ok(2+3=='5', "2+3=='5'");
 });
-QUnit.test("assert.equal", function(assert) {				//Compare the value of two primitives, having the same value. Does not work on Objects (i.e. arrays)
+QUnit.test("assert.equal", function(assert) {				//Compare ONLY the value 2 primitives(including arrays). Does not work on Objects (i.e. arrays)
 	expect(6); //optional
 	assert.equal("abc", "abc", "'abc' == 'abc'");
 	assert.equal(5, 5, "5==5");
@@ -63,21 +63,23 @@ QUnit.test("assert.equal", function(assert) {				//Compare the value of two prim
 	assert.equal(0, false, "0 == false");
 	assert.equal(null, undefined, "null == undefined");
 });
-QUnit.test("assert.deepEqual", function(assert) {			//Compare the value of two primitives, having the same value. Does not work on Objects (i.e. arrays)
-	expect(6); //optional
+QUnit.test("assert.deepEqual", function(assert) {			//Compare the value & the type of 2 primitives(including arrays). Does not work on Objects (i.e. arrays)
+	expect(7); //optional
 	assert.deepEqual("abc", "abc", "'abc' === 'abc'");
 	assert.deepEqual(5, 5, "5 === 5");
 	assert.deepEqual(2+3, 5, "2+3 === 5");
 	assert.notDeepEqual(2+3, "5", "2+3 !== 5");
+	assert.deepEqual([1,2,3], [1,2,3], "[1,2,3] === [1,2,3]");
 	assert.notDeepEqual(0, false, "0 !== false");
 	assert.notDeepEqual(null, undefined, "null !== undefined");
 });
-QUnit.test("assert.strictEqual", function(assert) {
-	expect(6); //optional
+QUnit.test("assert.strictEqual", function(assert) {			//Compare the value & the type & THE OBJECT of 2 primitives(including arrays). Does not work on Objects (i.e. arrays)
+	expect(7); //optional
 	assert.strictEqual("abc", "abc", "'abc' === 'abc'");
 	assert.strictEqual(5, 5, "5 === 5");
 	assert.strictEqual(2+3, 5, "2+3 === 5");
 	assert.notStrictEqual(2+3, "5", "2+3 !== 5");
+	assert.notStrictEqual([1,2,3], [1,2,3], "[1,2,3] !== [1,2,3]");
 	assert.notStrictEqual(0, false, "0 !== false");
 	assert.notStrictEqual(null, undefined, "null !== undefined");
 });
