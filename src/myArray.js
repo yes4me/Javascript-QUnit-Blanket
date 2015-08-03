@@ -3,19 +3,30 @@ Created:	2015/07/24
 Author:		Thomas Nguyen - thomas_ejob@hotmail.com
 Location:	https://github.com/yes4me/
 Purpose:	Learn Javascript Object and...
-	What is needed
-	==============
-	In this exercise, you will be writing three functions and providing tests for
-	these three functions.
+	------------------------------------------------------------------------------------
+	Function #1: function range(numbers)
+	------------------------------------------------------------------------------------
+	Function takes two arguments (start and end) and optionally takes a third
+	argument called step. The function should return an array containing all the
+	numbers from start up to end (including both start as well as end).
 
-	What is provided
-	================
-	No files are provided.
+	The step if provided indicates the "step" value used to build up the array.
 
-	Function # 1
-	============
-	Write a function with the following signature:
-	  function removeDuplicates(numbers)
+	If step is not provided, it should return an array which increments (or decrements)
+	the elements by 1.
+
+	Examples:
+	=========
+
+	range(2,5) --> [2,3,4,5]
+	range(5,3) --> [5,4,3]
+	range(3,10,3) --> [3,6,9]
+
+	When the parameters are invalid, the function should return undefined.
+
+	------------------------------------------------------------------------------------
+	Function #2: function removeDuplicates(numbers)
+	------------------------------------------------------------------------------------
 
 	The function takes an array of numbers (sorted or not) and removes duplicates
 	from that array. It returns an array of numbers with duplicates removed (i.e.
@@ -29,10 +40,9 @@ Purpose:	Learn Javascript Object and...
 	Though, you may find that if you sort the numbers before working on them yield
 	better implementation
 
-	Function # 2
-	=============
-	Write a function with the following signature:
-	   function hasDuplicates(numbers)
+	------------------------------------------------------------------------------------
+	Function #3: function hasDuplicates(numbers)
+	------------------------------------------------------------------------------------
 
 	The function takes an array of numbers and returns whether there were duplicates
 	or not (returns true if there are duplicates, false otherwise)
@@ -44,10 +54,9 @@ Purpose:	Learn Javascript Object and...
 	This function will also be helpful in writing your tests. Can you think of a way
 	to incorporate the hasDuplicates function while writing tests for removeDuplicates?
 
-	Function # 3
-	============
-	Write a function with the following signature:
-		function areConsecutive(numbers, [allowDuplicates])
+	------------------------------------------------------------------------------------
+	Function #4: function areConsecutive(numbers, [allowDuplicates])
+	------------------------------------------------------------------------------------
 
 	The function takes an array of numbers and determines if the numbers are consecutive
 	or not.
@@ -73,15 +82,6 @@ Purpose:	Learn Javascript Object and...
 
 	Note: The range function developed in first question can be used to generate
 	consecutive numbers as well (if the step == +1 / -1)
-
-	You can use that function while writing your tests
-
-	Why this exercise
-	=================
-	By developing these three small functions, you will see how they work together
-	Also you will see how you can use helper functions to develop you tests
-	You will also how see code written somewhere else (range.js) can be used to develop
-	you test data.
 Others:		https://api.qunitjs.com/category/assert/
 			http://stackoverflow.com/questions/17989270/for-loop-performance-storing-array-length-in-a-variable
 			http://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript
@@ -105,6 +105,36 @@ MyArray.prototype.setArray = function(numbers) {
 	}
 	return false;
 }
+
+// Given start, end and step, returns an array with start and end both inclusive and seperated by step (positive or negative)
+MyArray.prototype.range = function(start, end, step) {
+	numArgs = arguments.length;
+	if (numArgs < 2)
+		return undefined;
+	if (step==0)
+		return undefined;
+
+	if (step==undefined)
+		step = (start>end)? -1:1;		//If start=end, the default value must be 1 to avoid infinite loop later on
+	if ((start<end) && (step<0))
+		return undefined;
+	if ((start>end) && (step>0))
+		return undefined;
+
+	var nbValues	= (start-end)/step;
+	nbValues		= Math.floor(Math.abs(nbValues))+1;
+
+	var myArray		= [];
+	var counter		= 0;
+	var value		= start;
+	for (counter=0; counter<nbValues; counter++)
+	{
+		myArray.push(value);
+		value += step;
+	}
+	return myArray;
+}
+
 //The function takes an array of numbers (sorted or not) and returns an array of numbers with duplicates removed
 MyArray.prototype.removeDuplicates = function(numbers) {
 	if (!(numbers instanceof Array))
