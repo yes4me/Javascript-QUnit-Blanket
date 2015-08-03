@@ -33,7 +33,7 @@ QUnit.test('special cases', function(assert) {
 	assert.throws(function() { compute('a') }, "throw exception error when not an array")
 });
 QUnit.test('typical values', function(assert) {
-	expect(10);
+	expect(11);
 	assert.deepEqual(compute([1,2,3,4]), [2,3], "4 positive numbers in order")
 	assert.deepEqual(compute([4,3,2,1]), [2,3], "4 positive numbers in various order")
 	assert.deepEqual(compute([-4,-2,-3,-1]), [-3,-2], "4 negative numbers in various order")
@@ -44,6 +44,7 @@ QUnit.test('typical values', function(assert) {
 	assert.deepEqual(compute([1,2,3,1]), [1,2], "4 positive numbers in order")
 	assert.deepEqual(compute([3,-3,2]), [2,2], "3 numbers")
 	assert.deepEqual(compute([3,-3]), [-3,3], "2 numbers")
+	assert.deepEqual(compute([-3,3]), [3,-3], "2 numbers")
 });
 -QUnit.test('Others', function(assert) {
 	expect(1);

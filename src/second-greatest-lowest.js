@@ -35,10 +35,10 @@ function compute(numbers) {
 		throw new Error('Argument is expected to be an array');
 	if (numbers.length<2)
 		return undefined;
+	if (numbers.length==2)
+		return [ numbers[1], numbers[numbers.length-2] ];
 
 	numbers.sort(sortNumber);
-	if (numbers.length==2)
-		return numbers;
 	//sort method sorts elements alphabetically by default
 	return [ numbers[1], numbers[numbers.length-2] ];
 }
