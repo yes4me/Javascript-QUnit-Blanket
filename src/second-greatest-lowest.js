@@ -40,5 +40,5 @@ function compute(numbers) {
 	if (numbers.length==2)
 		return numbers;
 	//sort method sorts elements alphabetically by default
-	return [numbers[1], numbers[numbers.length-2]];
+	return [ numbers[1], numbers[numbers.length-2] ];
 }
