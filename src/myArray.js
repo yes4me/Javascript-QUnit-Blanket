@@ -93,12 +93,24 @@ function MyArray(numbers) {
 	else
 		this.numbers = null;
 };
+
 //Getters and setters
-MyArray.prototype.getArray = function() {
+MyArray.prototype.checkArray = function(numbers) {
+	if (!(numbers instanceof Array))
+		return false;
+	if (numbers.length==0)
+		return false;
+	return true;
+}
+
+//Getters and setters
+MyArray.prototype.getArray = function(numbers) {
+	if ( this.checkArray(numbers) )
+		return numbers;
 	return this.numbers;
 }
 MyArray.prototype.setArray = function(numbers) {
-	if (numbers instanceof Array)
+	if ( this.checkArray(numbers) )
 	{
 		this.numbers = numbers;
 		return true;
@@ -137,22 +149,19 @@ MyArray.prototype.range = function(start, end, step) {
 
 //The function takes an array of numbers (sorted or not) and returns an array of numbers with duplicates removed
 MyArray.prototype.removeDuplicates = function(numbers) {
-	if (!(numbers instanceof Array))
-		numbers = this.getArray();
-	if (!(numbers instanceof Array))
+	numbers = this.getArray(numbers);
+	if (!numbers)
 		throw new Error('Argument is expected to be an array');
-	if (numbers.length==0)
-		throw new Error('Argument is empty');
 
 	var counter = 0;
 	var resultArray		= [];
-	var compareArray	= [];
-	var numbersLength	= numbers.length;
+	var noDuplicateArray	= [];
+	var numbersLength	= numbers.length;		//This reduces memory
 	for (i=0; i<numbersLength; i++)
 	{
-		if (compareArray[ numbers[i] ] == undefined)
+		if (noDuplicateArray[ numbers[i] ] != 1)
 		{
-			compareArray[ numbers[i] ] = 1;
+			noDuplicateArray[ numbers[i] ] = 1;
 			resultArray[counter++] = numbers[i];
 		}
 	}
@@ -160,19 +169,16 @@ MyArray.prototype.removeDuplicates = function(numbers) {
 };
 //The function takes an array of numbers and returns whether there were duplicates or not (returns true if there are duplicates, false otherwise)
 MyArray.prototype.hasDuplicates = function(numbers) {
-	if (!(numbers instanceof Array))
-		numbers = this.getArray();
-	if (!(numbers instanceof Array))
+	numbers = this.getArray(numbers);
+	if (!numbers)
 		throw new Error('Argument is expected to be an array');
-	if (numbers.length==0)
-		throw new Error('Argument is empty');
 
-	var compareArray	= [];
-	var numbersLength	= numbers.length;
+	var noDuplicateArray	= [];
+	var numbersLength	= numbers.length;		//This reduces memory
 	for (i=0; i<numbersLength; i++)
 	{
-		if (compareArray[ numbers[i] ] == undefined)
-			compareArray[ numbers[i] ] = 1;
+		if (noDuplicateArray[ numbers[i] ] != 1)
+			noDuplicateArray[ numbers[i] ] = 1;
 		else
 			return true;
 	}
@@ -180,12 +186,9 @@ MyArray.prototype.hasDuplicates = function(numbers) {
 }
 //The function takes an array of numbers and return the identical difference between them.
 MyArray.prototype.getStep = function(numbers) {
-	if (!(numbers instanceof Array))
-		numbers = this.getArray();
-	if (!(numbers instanceof Array))
+	numbers = this.getArray(numbers);
+	if (!numbers)
 		throw new Error('Argument is expected to be an array');
-	if (numbers.length==0)
-		throw new Error('Argument is empty');
 
 	if (numbers.length==1)
 		return 0;
@@ -199,24 +202,67 @@ MyArray.prototype.getStep = function(numbers) {
 		tmp = numbers[i+1] - numbers[i];
 		if (!allowDuplicates || (tmp!=0))
 		{
-			//alert(8.3-7.3) did not return 1 but 1.000009 in Javascript
+			//alert(8.3-7.3) did not return 1 but 1.000009 in Javascript => Hence why I use BigNumber
 			numbersSteps[counter++] = new BigNumber( numbers[i+1] ).minus( numbers[i] );
 		}
 	}
 	numbersSteps = this.removeDuplicates(numbersSteps);
 	return (numbersSteps.length==1)? Number(numbersSteps[0]) : undefined;
 }
-//The function takes an array of numbers and determines if the numbers are consecutive (within 1 digit) or not.
-MyArray.prototype.areConsecutive = function(numbers) {
-	if (!(numbers instanceof Array))
-		numbers = this.getArray();
-	if (!(numbers instanceof Array))
+//The function takes an array of sorted NUMBERS, and determines if the numbers are consecutive (within 1 digit) or not.
+//MyArray.prototype.areConsecutiveNumbersSorted = function(numbers) {
+MyArray.prototype.areConsecutiveSorted = function(numbers) {
+	numbers = this.getArray(numbers);
+	if (!numbers)
 		throw new Error('Argument is expected to be an array');
+
 	if (numbers.length==1)
 		return true;
 	var allowDuplicates = (arguments[1] == true)? true:false;
 
-	//undefined is a value in Javascript. If numbers==undefined, it is passed to getStep(), and QUnit cannot check for no argument
 	var step = this.getStep(numbers, allowDuplicates);
 	return (Math.abs(step)==1)? true: false;
+}
+//The function takes an array of UNsorted NUMBERS, and determines if the NUMBERS are consecutive (within 1 digit) or not.
+MyArray.prototype.areConsecutiveUnSorted = function(numbers) {
+	numbers = this.getArray(numbers);
+	if (!numbers)
+		throw new Error('Argument is expected to be an array');
+
+	if (numbers.length==1)
+		return true;
+	var allowDuplicates = (arguments[1] == true)? true:false;
+
+	var noDuplicateArray		= [];
+	var noDuplicateArrayLength	= 0;
+	var min_value			= numbers[0];
+	var max_value			= numbers[0];
+	var numbersLength		= numbers.length;		//This reduces memory
+	for (i=0; i<numbersLength; i++)
+	{
+		if ( numbers[i]<min_value )
+			min_value = numbers[i];
+		if ( max_value<numbers[i] )
+			max_value = numbers[i];
+
+		if (noDuplicateArray[ numbers[i] ] != 1)
+		{
+			noDuplicateArray[ numbers[i] ] = 1;
+			noDuplicateArrayLength++;
+
+			//Make sure the difference is within integer values (ex: no 0.5 difference)
+			var value	= new BigNumber( min_value ).minus( numbers[i] );
+			var pattern	= new RegExp("[\.]");
+			if ( pattern.test(value) )
+				return false;
+		}
+		else if (!allowDuplicates)
+			return false;
+	}
+
+	var numberOfValues = new BigNumber(max_value).minus(min_value).add(1);
+	if (noDuplicateArrayLength != numberOfValues)
+		return false;
+
+	return true;
 }

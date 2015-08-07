@@ -226,71 +226,106 @@ QUnit.test('special cases: MyArray is undefined', function(assert) {
 
 
 
-QUnit.module("areConsecutive Tests", {
+QUnit.module("areConsecutiveSorted Tests", {
 	beforeEach : function() {
-		console.log("beforeEach: Starting areConsecutive test");
+		console.log("beforeEach: Starting areConsecutiveSorted test");
 		myArray = new MyArray();
 	},
 	afterEach: function() {
-		console.log("afterEach: test areConsecutive completed");
+		console.log("afterEach: test areConsecutiveSorted completed");
 		myArray = null;
 	}
 });
 QUnit.test('special cases: MyArray is undefined', function(assert) {
 	expect(4);
-	assert.throws(function() { myArray.areConsecutive() }, "no argument = undefined");
-	assert.throws(function() { myArray.areConsecutive('a') }, "argument not array = undefined");
-	assert.throws(function() { myArray.areConsecutive([]) }, "argument is empty array");
-	assert.deepEqual( myArray.areConsecutive([1,2,3], 'xxx', [4,5,6]), true, "all additional parameters are skipped");
+	assert.throws(function() { myArray.areConsecutiveSorted() }, "no argument = undefined");
+	assert.throws(function() { myArray.areConsecutiveSorted('a') }, "argument not array = undefined");
+	assert.throws(function() { myArray.areConsecutiveSorted([]) }, "argument is empty array");
+	assert.deepEqual( myArray.areConsecutiveSorted([1,2,3], 'xxx', [4,5,6]), true, "all additional parameters are skipped");
 });
 QUnit.test('positive values', function(assert) {
 	expect(9);
-	assert.deepEqual( myArray.areConsecutive([4]), true, "areConsecutive([4]) == true");
-	assert.deepEqual( myArray.areConsecutive([3,4]), true, "areConsecutive([3,4]) == true");
-	assert.deepEqual( myArray.areConsecutive([4,3]), true, "areConsecutive([4,3]) == true");
-	assert.deepEqual( myArray.areConsecutive([4,4]), false, "areConsecutive([4,4]) == false");
-	assert.deepEqual( myArray.areConsecutive([2,3,4]), true, "areConsecutive([2,3,4]) == true");
-	assert.deepEqual( myArray.areConsecutive([4,3,2]), true, "areConsecutive([4,3,2]) == true");
-	assert.deepEqual( myArray.areConsecutive([3,4,2]), false, "areConsecutive([4,3,2]) == false");
-	assert.deepEqual( myArray.areConsecutive([4,2,3]), false, "areConsecutive([4,3,2]) == false");
-	assert.deepEqual( myArray.areConsecutive([4,4,4]), false, "areConsecutive([4,4,4]) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([4]), true, "areConsecutiveSorted([4]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([3,4]), true, "areConsecutiveSorted([3,4]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([4,3]), true, "areConsecutiveSorted([4,3]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([4,4]), false, "areConsecutiveSorted([4,4]) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([2,3,4]), true, "areConsecutiveSorted([2,3,4]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([4,3,2]), true, "areConsecutiveSorted([4,3,2]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([3,4,2]), false, "areConsecutiveSorted([4,3,2]) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([4,2,3]), false, "areConsecutiveSorted([4,3,2]) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([4,4,4]), false, "areConsecutiveSorted([4,4,4]) == false");
 });
 QUnit.test('negative values', function(assert) {
 	expect(9);
-	assert.deepEqual( myArray.areConsecutive([-4]), true, "areConsecutive([-4]) == true");
-	assert.deepEqual( myArray.areConsecutive([-3,-4]), true, "areConsecutive([-3,-4]) == true");
-	assert.deepEqual( myArray.areConsecutive([-4,-3]), true, "areConsecutive([-4,-3]) == true");
-	assert.deepEqual( myArray.areConsecutive([-4,-4]), false, "areConsecutive([-4,-4]) == false");
-	assert.deepEqual( myArray.areConsecutive([-2,-3,-4]), true, "areConsecutive([-2,-3,-4]) == true");
-	assert.deepEqual( myArray.areConsecutive([-4,-3,-2]), true, "areConsecutive([-4,-3,-2]) == true");
-	assert.deepEqual( myArray.areConsecutive([-3,-4,-2]), false, "areConsecutive([-4,-3,-2]) == false");
-	assert.deepEqual( myArray.areConsecutive([-4,-2,-3]), false, "areConsecutive([-4,-3,-2]) == false");
-	assert.deepEqual( myArray.areConsecutive([-4,-4,-4]), false, "areConsecutive([-4,-4,-4]) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([-4]), true, "areConsecutiveSorted([-4]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([-3,-4]), true, "areConsecutiveSorted([-3,-4]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([-4,-3]), true, "areConsecutiveSorted([-4,-3]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([-4,-4]), false, "areConsecutiveSorted([-4,-4]) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([-2,-3,-4]), true, "areConsecutiveSorted([-2,-3,-4]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([-4,-3,-2]), true, "areConsecutiveSorted([-4,-3,-2]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([-3,-4,-2]), false, "areConsecutiveSorted([-4,-3,-2]) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([-4,-2,-3]), false, "areConsecutiveSorted([-4,-3,-2]) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([-4,-4,-4]), false, "areConsecutiveSorted([-4,-4,-4]) == false");
 });
 QUnit.test('positive and negative values', function(assert) {
 	expect(6);
-	assert.deepEqual( myArray.areConsecutive([-1,0,1]), true, "areConsecutive([-1,0,1]) == true");
-	assert.deepEqual( myArray.areConsecutive([1,0,-1]), true, "areConsecutive([1,0,-1]) == true");
-	assert.deepEqual( myArray.areConsecutive([1,-1,-3]), false, "areConsecutive([1,-1,-3]) == false");
-	assert.deepEqual( myArray.areConsecutive([4.1,3.1,2.1]), true, "areConsecutive([4.1,3.1,2.1]) == true");
-	assert.deepEqual( myArray.areConsecutive([-4.1,-3.1,-2.1]), true, "areConsecutive([-4.1,-3.1,-2.1]) == true");
-	assert.deepEqual( myArray.areConsecutive([-3.1,-4.1,-2.1]), false, "areConsecutive([-4.1,-3.1,-2.1]) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([-1,0,1]), true, "areConsecutiveSorted([-1,0,1]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([1,0,-1]), true, "areConsecutiveSorted([1,0,-1]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([1,-1,-3]), false, "areConsecutiveSorted([1,-1,-3]) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([4.1,3.1,2.1]), true, "areConsecutiveSorted([4.1,3.1,2.1]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([-4.1,-3.1,-2.1]), true, "areConsecutiveSorted([-4.1,-3.1,-2.1]) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([-3.1,-4.1,-2.1]), false, "areConsecutiveSorted([-4.1,-3.1,-2.1]) == false");
 });
 QUnit.test('positive and negative values NOT allowing duplicates', function(assert) {
 	expect(6);
-	assert.deepEqual( myArray.areConsecutive([0,1,2,2,3], false), false, "areConsecutive([0,1,2,2,3], false) == false");
-	assert.deepEqual( myArray.areConsecutive([3,2,2,1,0], false), false, "areConsecutive([3,2,2,1,0], false) == false");
-	assert.deepEqual( myArray.areConsecutive([-0,-1,-2,-2,-3], false), false, "areConsecutive([-0,-1,-2,-2,-3], false) == false");
-	assert.deepEqual( myArray.areConsecutive([-3,-2,-2,-1,-0], false), false, "areConsecutive([-3,-2,-2,-1,-0], false) == false");
-	assert.deepEqual( myArray.areConsecutive([-2,-1,0,1,1,2], false), false, "areConsecutive([-2,-1,0,1,1,2], false) == false");
-	assert.deepEqual( myArray.areConsecutive([2,1,1,0,-1,-2], false), false, "areConsecutive([2,1,1,0,-1,-2], false) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([0,1,2,2,3], false), false, "areConsecutiveSorted([0,1,2,2,3], false) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([3,2,2,1,0], false), false, "areConsecutiveSorted([3,2,2,1,0], false) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([-0,-1,-2,-2,-3], false), false, "areConsecutiveSorted([-0,-1,-2,-2,-3], false) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([-3,-2,-2,-1,-0], false), false, "areConsecutiveSorted([-3,-2,-2,-1,-0], false) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([-2,-1,0,1,1,2], false), false, "areConsecutiveSorted([-2,-1,0,1,1,2], false) == false");
+	assert.deepEqual( myArray.areConsecutiveSorted([2,1,1,0,-1,-2], false), false, "areConsecutiveSorted([2,1,1,0,-1,-2], false) == false");
 });
 QUnit.test('positive and negative values allowing duplicates', function(assert) {
 	expect(6);
-	assert.deepEqual( myArray.areConsecutive([0,1,2,2,3], true), true, "areConsecutive([0,1,2,2,3], true) == true");
-	assert.deepEqual( myArray.areConsecutive([3,2,2,1,0], true), true, "areConsecutive([3,2,2,1,0], true) == true");
-	assert.deepEqual( myArray.areConsecutive([-0,-1,-2,-2,-3], true), true, "areConsecutive([-0,-1,-2,-2,-3], true) == true");
-	assert.deepEqual( myArray.areConsecutive([-3,-2,-2,-1,-0], true), true, "areConsecutive([-3,-2,-2,-1,-0], true) == true");
-	assert.deepEqual( myArray.areConsecutive([-2,-1,0,1,1,2], true), true, "areConsecutive([-2,-1,0,1,1,2], true) == true");
-	assert.deepEqual( myArray.areConsecutive([2,1,1,0,-1,-2], true), true, "areConsecutive([2,1,1,0,-1,-2], true) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([0,1,2,2,3], true), true, "areConsecutiveSorted([0,1,2,2,3], true) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([3,2,2,1,0], true), true, "areConsecutiveSorted([3,2,2,1,0], true) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([-0,-1,-2,-2,-3], true), true, "areConsecutiveSorted([-0,-1,-2,-2,-3], true) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([-3,-2,-2,-1,-0], true), true, "areConsecutiveSorted([-3,-2,-2,-1,-0], true) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([-2,-1,0,1,1,2], true), true, "areConsecutiveSorted([-2,-1,0,1,1,2], true) == true");
+	assert.deepEqual( myArray.areConsecutiveSorted([2,1,1,0,-1,-2], true), true, "areConsecutiveSorted([2,1,1,0,-1,-2], true) == true");
+});
+
+
+
+QUnit.module("areConsecutiveUnsorted Tests", {
+	beforeEach : function() {
+		console.log("beforeEach: Starting areConsecutiveSorted test");
+		myArray = new MyArray();
+	},
+	afterEach: function() {
+		console.log("afterEach: test areConsecutiveSorted completed");
+		myArray = null;
+	}
+});
+QUnit.test('NOT allowing duplicates', function(assert) {
+	expect(8);
+	assert.deepEqual( myArray.areConsecutiveUnSorted([2,4,1,5,3], false), true, "areConsecutiveUnSorted([2,4,1,5,3], false) == true");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([2,0,1,3,-1], false), true, "areConsecutiveUnSorted([2,0,1,3,-1], false) == true");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([2.3,4.3,5.3,3.3], false), true, "areConsecutiveUnSorted([2.3,4.3,5.3,3.3], false) == true");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([2.3,4.3,5.3,3.3,4.3], false), false, "areConsecutiveUnSorted([2.3,4.3,5.3,3.3,4.3], false) == false");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([-2.3,-4.3,-5.3,-3.3], false), true, "areConsecutiveUnSorted([-2.3,-4.3,-5.3,-3.3], false) == true");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([-2.3,-4.3,-5.3,-3.3,-4.3], false), false, "areConsecutiveUnSorted([-2.3,-4.3,-5.3,-3.3,-4.3], false) == false");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([1.2,-1.8,-0.8,0.2], false), true, "areConsecutiveUnSorted([1.2,-1.8,-0.8,0.2], false) == true");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([1.2,-1.8,-0.8,0.2,-1.8], false), false, "areConsecutiveUnSorted([1.2,-1.8,-0.8,0.2,-1.8], false) == false");
+});
+QUnit.test('allowing duplicates', function(assert) {
+	expect(8);
+	assert.deepEqual( myArray.areConsecutiveUnSorted([2,4,1,5,3], true), true, "areConsecutiveUnSorted([2,4,1,5,3], true) == true");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([2,0,1,3,-1], true), true, "areConsecutiveUnSorted([2,0,1,3,-1], true) == true");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([2.3,4.3,5.3,3.3], true), true, "areConsecutiveUnSorted([2.3,4.3,5.3,3.3], true) == true");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([2.3,4.3,5.3,3.3,4.3], true), true, "areConsecutiveUnSorted([2.3,4.3,5.3,3.3,4.3], true) == true");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([-2.3,-4.3,-5.3,-3.3], true), true, "areConsecutiveUnSorted([-2.3,-4.3,-5.3,-3.3], true) == true");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([-2.3,-4.3,-5.3,-3.3,-4.3], true), true, "areConsecutiveUnSorted([-2.3,-4.3,-5.3,-3.3,-4.3], true) == true");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([1.2,-1.8,-0.8,0.2], true), true, "areConsecutiveUnSorted([1.2,-1.8,-0.8,0.2], true) == true");
+	assert.deepEqual( myArray.areConsecutiveUnSorted([1.2,-1.8,-0.8,0.2,-1.8], true), true, "areConsecutiveUnSorted([1.2,-1.8,-0.8,0.2,-1.8], true) == true");
 });
