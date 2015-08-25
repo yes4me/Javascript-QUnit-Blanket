@@ -3,8 +3,8 @@
 
   What is it?
   -----------
-  This is a demo of QUnit with Blanket.js for Javascript coverage.
   QUnit is a powerful, easy-to-use JavaScript unit testing framework.
+  Blanket.js an easy to use JavaScript coverage testing tool.
 
 
   The Latest Version
