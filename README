@@ -1,0 +1,31 @@
+
+                          QUnit & Blanket.js
+
+  What is it?
+  -----------
+  This is a demo of QUnit with Blanket.js for Javascript coverage.
+
+
+  The Latest Version
+  ------------------
+  https://github.com/yes4me?tab=repositories
+
+
+  Documentation
+  -------------
+  Explication of the code is: https://www.youtube.com/watch?v=K001WMGPWrM
+
+
+  Installation
+  ------------
+  Just open any of the HTML file using a browser:
+    index_ remote.html
+    index_local.html
+    myArray-tests.html
+    second-greatest-lowest-tests.html
+  PS: I tested this with Firefox 39.0
+
+
+  Contacts
+  --------
+  Author:	Thomas Nguyen - thomas_ejob@hotmail.com
